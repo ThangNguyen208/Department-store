@@ -83,9 +83,6 @@ const data = {
       numReviews: 15,
       description: "high quality product",
     },
-    {
-      image: "/image/8.jpg",
-    },
   ],
 };
 export default data;
