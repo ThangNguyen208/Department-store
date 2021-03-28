@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/departmentstore', {
+mongoose.connect(process.env.MONGODB_URL || 'mongodb+srv://departmentstore:store123@cluster0.ispxd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     /* các tùy chọn này để loại bỏ các cảnh báo k dùng nữa */
     useNewUrlParser: true,
     useUnifiedTopology: true,
