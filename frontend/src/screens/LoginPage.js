@@ -64,6 +64,7 @@ export default function LoginPage(props) {
             New customer? <Link to={`/register?redirect=${redirect}`}>Registration Now!!!!</Link>
           </div>
         </div>
+        
       </form>
     </div>
   );

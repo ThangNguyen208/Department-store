@@ -67,6 +67,7 @@ userRouter.post(
       });
     })
   );
+  
   userRouter.get(
     '/:id',
     expressAsyncHandler(async (req, res) => {
