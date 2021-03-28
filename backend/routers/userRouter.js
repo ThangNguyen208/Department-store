@@ -154,6 +154,23 @@ userRouter.post(
         res.status(404).send({ message: 'User Not Found' });
       }
     })
-  );
+  ); 
   
+    userRouter.patch('/reserPassword/:email', expressAsyncHandler(async (req,res) => {
+      try{
+        const user = await User.findOne( {email:req.params.email} );
+        
+        user.set({password: bcrypt.hashSync(req.body.password, 8)});
+        const result = await user.save();
+
+        res.send(result);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+      })
+    );
+
+
+
+    
 export default userRouter;
