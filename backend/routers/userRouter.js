@@ -22,8 +22,12 @@ userRouter.get(
   expressAsyncHandler(async (req, res) => {
     // await User.remove({});
     /* insertMany chấp nhận 1 mảng và chèn các đối tượng trên amngr đó trong bộ sưu tập ng dùng  */
-    const createdUsers = await User.insertMany(data.users);
-    res.send({ createdUsers });
+    try{
+      const createdUsers = await User.insertMany(data.users);
+      res.send({ createdUsers });
+    } catch(err){
+      res.send(err);
+    }
   })
 );
 
@@ -156,19 +160,19 @@ userRouter.post(
     })
   ); 
   
-    userRouter.patch('/reserPassword/:email', expressAsyncHandler(async (req,res) => {
-      try{
-        const user = await User.findOne( {email:req.params.email} );
+    // userRouter.patch('/reserPassword/:email', expressAsyncHandler(async (req,res) => {
+    //   try{
+    //     const user = await User.findOne( {email:req.params.email} );
         
-        user.set({password: bcrypt.hashSync(req.body.password, 8)});
-        const result = await user.save();
+    //     user.set({password: bcrypt.hashSync(req.body.password, 8)});
+    //     const result = await user.save();
 
-        res.send(result);
-        } catch (error) {
-            res.status(500).send(error);
-        }
-      })
-    );
+    //     res.send(result);
+    //     } catch (error) {
+    //         res.status(500).send(error);
+    //     }
+    //   })
+    // );
 
 
 
