@@ -49,6 +49,8 @@ header {
   width: 100%;
   grid-area: header;
   background-color: #607c3c;
+  position: fixed;
+  z-index: 999;
 }
 main {
   grid-area: main;
