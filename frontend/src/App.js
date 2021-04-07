@@ -51,11 +51,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="grid">
-        {/* <MessengerCustomerChat
-          pageId="100431685488442"
-          appId="190623915955910"
-          // htmlRef={window.location.pathname}
-        /> */}
         <header className="row">
           <div>
             <button
@@ -76,13 +71,15 @@ function App() {
               )}
             ></Route>
           </div>
-          <div>
+          <div className='menune'>
+            <div className="miu">
             <Link to="/cart">
               <i class="fas fa-cart-plus"></i>
               {cartItems.length > 0 && (
                 <span className="icon">{cartItems.length}</span>
               )}
             </Link>
+            </div>
             {/* <Link to="/register">Registration</Link> */}
 
             {userInfom ? (

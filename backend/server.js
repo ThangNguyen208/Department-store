@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-mongoose.connect(process.env.MONGODB_URL || 'mongodb+srv://departmentstore:duyenso123@cluster0.ispxd.mongodb.net/departmentstore?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGODB_URL || 'mongodb+srv://duyenso123:duyenso123@cluster0.iaw6i.mongodb.net/departmentstore?retryWrites=true&w=majority', {
     /* các tùy chọn này để loại bỏ các cảnh báo k dùng nữa */
     useNewUrlParser: true,
     useUnifiedTopology: true,

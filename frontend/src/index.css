@@ -13,7 +13,9 @@ body {
 #root {
   height: 100%;
 }
-
+.container-fluid{
+  width: 100%;
+}
 .container {
 max-width: 100%;
 padding-right: 15px;
@@ -93,6 +95,14 @@ a.logo {
   padding: 0.2rem 0.7rem;
   font-size: 1.4rem;
   margin-left: 0.2rem;
+}
+.rew {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content:start;
+  align-items: center;
+  width: 100%;
+  left: 0;
 }
 .row {
   display: flex;
@@ -324,9 +334,10 @@ button.min{
 .search input {
   border-radius: 0.2rem 0 0 0.2rem;
   border-right: none;
-  margin-left: 0.1rem;
-  width: 45rem;
+  margin-left: 1.3rem;
+  width: 24rem;
 }
+
 .active {
   font-weight: bold;
 }
@@ -460,7 +471,12 @@ button.close-sidebar {
   background: #40c1df;
   text-align: center;
 }
-
+.menune {
+  display: flex;
+  justify-content: space-around;
+  align-content: space-around;
+  margin-top: 1rem;
+}
 .rss {
   background: #eb8314;
   text-align: center;

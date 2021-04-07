@@ -23,7 +23,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       } else {
         return { ...state, error: "",cartItems: [...state.cartItems, item] };
       }
-    /* lọc sản phẩm mà ý tưởng của nó ngang bằng với hành động */
+    // /* lọc sản phẩm mà ý tưởng của nó ngang bằng với hành động */ tieng viet cc ak
     case CART_REMOVE_ITEM:
       return {
         ...state,
