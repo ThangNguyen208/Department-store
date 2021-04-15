@@ -30,7 +30,7 @@ export default function OrderPage(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     const addPayPalScript = async () => {
-      const { data } = await Axios.get("/api/config/paypal");
+      const { data } = await Axios.get("/api/config/paypal"); /*The address is /API/config/paypal here data contains the client id*/
       const script = document.createElement("script");
       script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
