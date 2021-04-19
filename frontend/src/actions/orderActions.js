@@ -21,7 +21,15 @@ import {
   ORDER_DELETE_FAIL,
   ORDER_DELIVER_REQUEST,
   ORDER_DELIVER_SUCCESS,
-  ORDER_DELIVER_FAIL
+  ORDER_DELIVER_FAIL,
+  ORDER_SUMMARY_REQUEST,
+  ORDER_SUMMARY_SUCCESS,
+  ORDER_CONFIRM_SHIP_REQUEST,
+  ORDER_CONFIRM_SHIP_SUCCESS,
+  ORDER_CONFIRM_SHIP_FAIL,
+  ORDER_CONFIRM_TAKED_REQUEST,
+  ORDER_CONFIRM_TAKED_SUCCESS,
+  ORDER_CONFIRM_TAKED_FAIL
 } from "../constants/orderConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -137,6 +145,7 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
       userLogin: { userInfom },
     } = getState();
     try {
+     
       const { data } = Axios.delete(`/api/orders/${orderId}`, {
         headers: { Authorization: `Bearer ${userInfom.token}` },
       });
@@ -170,5 +179,74 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
           ? error.response.data.message
           : error.message;
       dispatch({ type: ORDER_DELIVER_FAIL, payload: message });
+    }
+  };
+
+  export const summaryOrder = () => async (dispatch, getState) => {
+    dispatch({ type: ORDER_SUMMARY_REQUEST });
+    const {
+      userLogin: { userInfom },
+    } = getState();
+    try {
+      const { data } = await Axios.get('/api/orders/summary', {
+        headers: { Authorization: `Bearer ${userInfom.token}` },
+      });
+      dispatch({ type: ORDER_SUMMARY_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: ORDER_CREATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+  export const confirmShip = (orderId) => async (dispatch, getState) => {
+    dispatch({ type: ORDER_CONFIRM_SHIP_REQUEST, payload: orderId });
+    const {
+      userLogin: { userInfom },
+    } = getState();
+    try {
+      const { data } = await Axios.post(
+        `/api/orders/confirm/${orderId}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${userInfom.token}` },
+        }
+      );
+      dispatch({ type: ORDER_CONFIRM_SHIP_SUCCESS, payload: data });
+    } catch (error) {
+      console.log(error.response);
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      dispatch({ type: ORDER_CONFIRM_SHIP_FAIL, payload: message });
+    }
+  };
+
+  export const confirmOrderTaked = (orderId) => async (dispatch, getState) => {
+    dispatch({ type: ORDER_CONFIRM_TAKED_REQUEST, payload: orderId });
+    const {
+      userLogin: { userInfom },
+    } = getState();
+    try {
+      const { data } = await Axios.post(
+        `/api/orders/confirmTake/${orderId}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${userInfom.token}` },
+        }
+      );
+      dispatch({ type: ORDER_CONFIRM_TAKED_SUCCESS, payload: data });
+    } catch (error) {
+      console.log(error.response);
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      dispatch({ type: ORDER_CONFIRM_TAKED_FAIL, payload: message });
     }
   };

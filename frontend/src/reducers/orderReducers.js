@@ -1,4 +1,11 @@
 import {
+  ORDER_CONFIRM_SHIP_FAIL,
+  ORDER_CONFIRM_SHIP_REQUEST,
+  ORDER_CONFIRM_SHIP_RESET,
+  ORDER_CONFIRM_SHIP_SUCCESS,
+  ORDER_CONFIRM_TAKED_FAIL,
+  ORDER_CONFIRM_TAKED_REQUEST,
+  ORDER_CONFIRM_TAKED_SUCCESS,
   ORDER_CREATE_FAIL,
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_RESET,
@@ -24,6 +31,9 @@ import {
   ORDER_PAY_REQUEST,
   ORDER_PAY_RESET,
   ORDER_PAY_SUCCESS,
+  ORDER_SUMMARY_FAIL,
+  ORDER_SUMMARY_REQUEST,
+  ORDER_SUMMARY_SUCCESS,
 } from "../constants/orderConstants";
 
 export const orderCreateReducer = (state = {}, action) => {
@@ -110,6 +120,23 @@ export const orderPayReducer = (state = {}, action) => {
     }
   };
 
+  
+  export const orderConfirmShipReducer = (state = {}, action) => {
+    switch (action.type) {
+      case ORDER_CONFIRM_SHIP_REQUEST:
+        return { loading: true };
+      case ORDER_CONFIRM_SHIP_SUCCESS:
+        return { loading: false, success: true };
+      case ORDER_CONFIRM_SHIP_FAIL:
+        return { loading: false, error: action.payload };
+      case ORDER_CONFIRM_SHIP_RESET:
+        return {};
+      default:
+        return state;
+    }
+  };
+
+
   export const orderDeliverReducer = (state = {}, action) => {
     switch (action.type) {
       case ORDER_DELIVER_REQUEST:
@@ -119,6 +146,37 @@ export const orderPayReducer = (state = {}, action) => {
       case ORDER_DELIVER_FAIL:
         return { loading: false, error: action.payload };
       case ORDER_DELIVER_RESET:
+        return {};
+      default:
+        return state;
+    }
+  };
+
+  export const orderSummaryReducer = (
+    state = { loading: true, summary: {} },
+    action
+  ) => {
+    switch (action.type) {
+      case ORDER_SUMMARY_REQUEST:
+        return { loading: true };
+      case ORDER_SUMMARY_SUCCESS:
+        return { loading: false, summary: action.payload };
+      case ORDER_SUMMARY_FAIL:
+        return { loading: false, error: action.payload };
+      default:
+        return state;
+    }
+  };
+
+  export const confirmOrderTakedReducer = (state = {}, action) => {
+    switch (action.type) {
+      case ORDER_CONFIRM_TAKED_REQUEST:
+        return { loading: true };
+      case ORDER_CONFIRM_TAKED_SUCCESS:
+        return { loading: false, success: true };
+      case ORDER_CONFIRM_TAKED_FAIL:
+        return { loading: false, error: action.payload };
+      case ORDER_CONFIRM_SHIP_RESET:
         return {};
       default:
         return state;

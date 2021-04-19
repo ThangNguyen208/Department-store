@@ -191,13 +191,13 @@ export default function OrderPage(props) {
                   {errorDeliver && (
                     <MessageBox variant="damn">{errorDeliver}</MessageBox>
                   )}
-                  <button
+                  {/* <button
                     type="button"
                     className="primary block"
                     onClick={deliverHandler}
                   >
                     Deliver Order
-                  </button>
+                  </button> */}
                 </li>
               )}
             </ul>

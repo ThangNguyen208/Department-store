@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteOrder, listOrders } from "../actions/orderActions";
+import { deleteOrder, listOrders, confirmShip } from "../actions/orderActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { ORDER_DELETE_RESET } from "../constants/orderConstants";
+import { ORDER_CONFIRM_SHIP_RESET, ORDER_DELETE_RESET } from "../constants/orderConstants";
 
 export default function OrderListPage(props) {
   const sellerMode = props.match.path.indexOf("/seller") >= 0;
@@ -14,24 +14,38 @@ export default function OrderListPage(props) {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
+
   } = orderDelete;
+
+  const orderConfirmShip = useSelector((state) => state.orderConfirmShip);
+  const {
+    loading: loadingConfirm,
+    error: errorConfirm,
+    success: successConfirm,
+  } = orderConfirmShip;
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfom } = userLogin;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: ORDER_DELETE_RESET });
+    dispatch({ type: ORDER_CONFIRM_SHIP_RESET });
     dispatch(listOrders({ seller: sellerMode ? userInfom._id : "" }));
-  }, [dispatch, sellerMode, successDelete, userInfom._id]);
+  }, [dispatch, sellerMode, successDelete, userInfom._id, successConfirm]);
   const deleteHandler = (order) => {
     if (window.confirm("Are you sure to delete?")) {
       dispatch(deleteOrder(order._id));
     }
   };
+  const confirmShipHandle = (order) => {
+    dispatch(confirmShip(order._id))
+  }
   return (
     <div>
       <h1>Orders</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
+      {loadingConfirm && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="damn">{errorDelete}</MessageBox>}
+      {errorConfirm && <MessageBox variant="damn">{errorConfirm}</MessageBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -46,6 +60,7 @@ export default function OrderListPage(props) {
               <th>TOTAL</th>
               <th>PAID</th>
               <th>DELIVERED</th>
+              <th>STATUS</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
@@ -63,6 +78,9 @@ export default function OrderListPage(props) {
                     : "No"}
                 </td>
                 <td>
+                  {order?.status}
+                </td>
+                <td>
                   <button
                     style={{ background: "#ececa3" }}
                     type="button"
@@ -77,10 +95,19 @@ export default function OrderListPage(props) {
                     style={{ background: "#FF6B6B" }}
                     type="button"
                     className="min-1"
+                    onClick={() => confirmShipHandle(order)}
+                  >
+                    <i class="fas fa-trash-alt"></i> confirm shipping
+                  </button>
+                  <button
+                    style={{ background: "#FF6B6B" }}
+                    type="button"
+                    className="min-1"
                     onClick={() => deleteHandler(order)}
                   >
                     <i class="fas fa-trash-alt"></i> Delete
                   </button>
+                  
                 </td>
               </tr>
             ))}

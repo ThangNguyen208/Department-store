@@ -28,6 +28,7 @@ import { listProductCategories } from "./actions/productActions";
 import LoadingBox from "./components/LoadingBox";
 import MessageBox from "./components/MessageBox";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
+import DashboardPage from "./screens/DashboardPage";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -251,6 +252,10 @@ function App() {
           <AdminRoute
             path="/user/:id/edit"
             component={UserEditPage}
+          ></AdminRoute>
+           <AdminRoute
+            path="/dashboard"
+            component={DashboardPage}
           ></AdminRoute>
           <SellerRoute
             path="/productlist/seller"
