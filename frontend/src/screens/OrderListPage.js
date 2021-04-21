@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteOrder, listOrders, confirmShip } from "../actions/orderActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { ORDER_CONFIRM_SHIP_RESET, ORDER_DELETE_RESET } from "../constants/orderConstants";
+import {
+  ORDER_CONFIRM_SHIP_RESET,
+  ORDER_DELETE_RESET,
+} from "../constants/orderConstants";
 
 export default function OrderListPage(props) {
   const sellerMode = props.match.path.indexOf("/seller") >= 0;
@@ -14,7 +17,6 @@ export default function OrderListPage(props) {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-
   } = orderDelete;
 
   const orderConfirmShip = useSelector((state) => state.orderConfirmShip);
@@ -37,8 +39,8 @@ export default function OrderListPage(props) {
     }
   };
   const confirmShipHandle = (order) => {
-    dispatch(confirmShip(order._id))
-  }
+    dispatch(confirmShip(order._id));
+  };
   return (
     <div>
       <h1>Orders</h1>
@@ -71,15 +73,15 @@ export default function OrderListPage(props) {
                 <td>{order?.user?.name}</td>
                 <td>{order?.createdAt?.substring(0, 10)}</td>
                 <td>{order?.totalPrice?.toFixed(2)}</td>
-                <td>{order?.isPaid ? order?.paidAt?.substring(0, 10) : "No"}</td>
                 <td>
-                  {order?.isDelivered
+                  {order?.isPaid ? order?.paidAt?.substring(0, 10) : "No"}
+                </td>
+                <td>
+                  {order.status === 'Received' || order.isDelivered
                     ? order?.deliveredAt?.substring(0, 10)
                     : "No"}
                 </td>
-                <td>
-                  {order?.status}
-                </td>
+                <td>{order?.status}</td>
                 <td>
                   <button
                     style={{ background: "#ececa3" }}
@@ -91,14 +93,17 @@ export default function OrderListPage(props) {
                   >
                     <i class="fas fa-eye"></i> Details
                   </button>
-                  <button
-                    style={{ background: "#FF6B6B" }}
-                    type="button"
-                    className="min-1"
-                    onClick={() => confirmShipHandle(order)}
-                  >
-                    <i class="fas fa-trash-alt"></i> confirm shipping
-                  </button>
+
+                  {order?.status === "Processing" && (
+                    <button
+                      style={{ background: "#31B404" }}
+                      type="button"
+                      className="min-1"
+                      onClick={() => confirmShipHandle(order)}
+                    >
+                      <i class="fas fa-shipping-fast"></i> Shipping
+                    </button>
+                  )}
                   <button
                     style={{ background: "#FF6B6B" }}
                     type="button"
@@ -107,7 +112,6 @@ export default function OrderListPage(props) {
                   >
                     <i class="fas fa-trash-alt"></i> Delete
                   </button>
-                  
                 </td>
               </tr>
             ))}

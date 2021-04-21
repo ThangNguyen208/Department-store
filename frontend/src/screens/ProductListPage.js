@@ -64,9 +64,9 @@ export default function ProductListPage(props) {
     <div>
       <div className="row">
         <h1>Products</h1>
-        <button type="button" className="primary" onClick={createHandler}>
+        {userInfom && userInfom.isSeller && (<button type="button" className="primary" onClick={createHandler}>
           <i class="fas fa-folder-plus"></i> Create
-        </button>
+        </button>)}
       </div>
 
       {loadingDelete && <LoadingBox></LoadingBox>}
@@ -100,7 +100,7 @@ export default function ProductListPage(props) {
                 <td>{product.brand}</td>
                 <td>
                   <button
-                  style={{background: "#b5e550"}}
+                    style={{ background: "#b5e550" }}
                     type="button"
                     className="min-1"
                     onClick={() =>

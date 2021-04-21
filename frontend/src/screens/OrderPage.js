@@ -80,14 +80,14 @@ export default function OrderPage(props) {
               <div className="card card-body">
                 <h2>Delivery:</h2>
                 <p>
-                  <strong>Full Name:</strong> {order.deliveryAddress.fullName}{" "}
+                  <strong>Full Name:</strong> {order?.deliveryAddress?.fullName}{" "}
                   <br />
-                  <strong>Address: </strong> {order.deliveryAddress.address},
-                  {order.deliveryAddress.city},{order.deliveryAddress.country}
+                  <strong>Address: </strong> {order?.deliveryAddress?.address},
+                  {order.deliveryAddress.city},{order?.deliveryAddress?.country}
                 </p>
-                {order.isDelivered ? (
+                {order?.status === 'Received' ||order?.isDelivered ? (
                   <MessageBox variant="success">
-                    Delivered at {order.deliveredAt}
+                    Delivered at {order?.deliveredAt}
                   </MessageBox>
                 ) : (
                   <MessageBox variant="damn">Not Delivery</MessageBox>
@@ -185,7 +185,7 @@ export default function OrderPage(props) {
                   )}
                 </li>
               )}
-              {userInfom.isAdmin && order.isPaid && !order.isDelivered && (
+              {userInfom?.isAdmin && order?.isPaid && !order?.isDelivered && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   {errorDeliver && (

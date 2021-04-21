@@ -73,7 +73,7 @@ export default function OrderHistoryPage(props) {
 
                   {order?.status === "Shipping" && (
                     <button
-                      style={{ background: "#ececa3" }}
+                      style={{ background: "#FF0040" }}
                       type="button"
                       className="min"
                       onClick={() => {
@@ -81,7 +81,7 @@ export default function OrderHistoryPage(props) {
                         confirmTaked(order._id);
                       }}
                     >
-                      <i class="fas fa-eye"></i> Received
+                      <i class="fas fa-gift"></i> Received
                     </button>
                   )}
                 </td>

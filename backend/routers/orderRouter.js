@@ -156,7 +156,7 @@ orderRouter.post(
   isAuth,
   isSeller,
   expressAsyncHandler(async (req, res) => {
-    await Order.updateOne({ _id: req.params.id }, { status: "Shipping" })
+    await Order.updateOne({ _id: req.params.id }, { status: "Shipping", deliveredAt: Date.now() })
       res.send({ message: "Order Confirmed" });
   })
 );
