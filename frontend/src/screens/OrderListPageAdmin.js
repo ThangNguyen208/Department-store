@@ -8,7 +8,7 @@ import {
   ORDER_DELETE_RESET,
 } from "../constants/orderConstants";
 
-export default function OrderListPageAdmin(props) {
+export default function OrderListPage(props) {
   const sellerMode = props.match.path.indexOf("/seller") >= 0;
   const orderLists = useSelector((state) => state.orderLists);
   const { loading, error, orders } = orderLists;
@@ -94,7 +94,7 @@ export default function OrderListPageAdmin(props) {
                     <i class="fas fa-eye"></i> Details
                   </button>
 
-                  {order?.status === "Processing" && (
+                  {/* {order?.status === "Processing" && (
                     <button
                       style={{ background: "#31B404" }}
                       type="button"
@@ -103,7 +103,7 @@ export default function OrderListPageAdmin(props) {
                     >
                       <i class="fas fa-shipping-fast"></i> Shipping
                     </button>
-                  )}
+                  )} */}
                   <button
                     style={{ background: "#FF6B6B" }}
                     type="button"

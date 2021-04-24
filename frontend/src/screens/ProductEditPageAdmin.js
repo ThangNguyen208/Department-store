@@ -6,7 +6,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
 
-export default function ProductEditPageAdmin(props) {
+export default function ProductEditPage(props) {
     const productId = props.match.params.id;
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
@@ -29,7 +29,7 @@ export default function ProductEditPageAdmin(props) {
     const dispatch = useDispatch();
     useEffect(() => {
         if (successUpdate) {
-            props.history.push('/productlist/seller');
+            props.history.push('/productlist/admin');
           }
           if (!product || product._id !== productId || successUpdate) {
             dispatch({ type: PRODUCT_UPDATE_RESET });

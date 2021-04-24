@@ -12,11 +12,13 @@ import HomePage from "./screens/HomePage";
 import LoginPage from "./screens/LoginPage";
 import OrderHistoryPage from "./screens/OrderHistoryPage";
 import OrderListPage from "./screens/OrderListPage";
+import OrderListPageAdmin from "./screens/OrderListPageAdmin";
 import OrderPage from "./screens/OrderPage";
 import PaymentPage from "./screens/PaymentPage";
 import PlaceOrderPage from "./screens/PlaceOrderPage";
 import ProductEditPage from "./screens/ProductEditPage";
 import ProductListPage from "./screens/ProductListPage";
+import ProductListPageAdmin from "./screens/ProductListPageAdmin";
 import ProductPage from "./screens/ProductPage";
 import ProfilePage from "./screens/ProfilePage";
 import RegisterPage from "./screens/RegisterPage";
@@ -29,6 +31,7 @@ import LoadingBox from "./components/LoadingBox";
 import MessageBox from "./components/MessageBox";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import DashboardPage from "./screens/DashboardPage";
+import ProductEditPageAdmin from "./screens/ProductEditPageAdmin";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -149,7 +152,7 @@ function App() {
                     </Link>
                   </li>
                   <li style={({ textAlign: "center" }, { display: "flex" })}>
-                    <Link to="/productlist">
+                    <Link to="/productlist/admin">
                       <sr>
                         <i class="fas fa-archive"></i>
                       </sr>{" "}
@@ -157,7 +160,7 @@ function App() {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/orderlist">
+                    <Link to="/orderlist/admin">
                       <i className="fas fa-shopping-basket"></i> Order
                     </Link>
                   </li>
@@ -210,6 +213,11 @@ function App() {
             component={ProductEditPage}
             exact
           ></Route>
+          <Route
+            path="/product/admin/:id/edit"
+            component={ProductEditPageAdmin}
+            exact
+          ></Route>
           <Route path="/login" component={LoginPage}></Route>
           <Route path="/register" component={RegisterPage}></Route>
           <Route path="/delivery" component={DeliveryAdressPage}></Route>
@@ -239,13 +247,13 @@ function App() {
           ></Route>
           <NewRoute path="/profile" component={ProfilePage}></NewRoute>
           <AdminRoute
-            path="/productlist"
-            component={ProductListPage}
+            path="/productlist/admin"
+            component={ProductListPageAdmin}
             exact
           ></AdminRoute>
           <AdminRoute
-            path="/orderlist"
-            component={OrderListPage}
+            path="/orderlist/admin"
+            component={OrderListPageAdmin}
             exact
           ></AdminRoute>
           <AdminRoute path="/userlist" component={UserListPage}></AdminRoute>

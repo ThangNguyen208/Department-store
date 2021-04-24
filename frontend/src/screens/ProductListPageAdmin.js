@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createProduct,
   deleteProduct,
   listProducts,
 } from "../actions/productActions";
@@ -12,7 +11,7 @@ import {
   PRODUCT_DELETE_RESET,
 } from "../constants/productConstants";
 
-export default function ProductListPage(props) {
+export default function ProductListPageAdmin(props) {
   const sellerMode = props.match.path.indexOf("/seller") >= 0;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
@@ -58,16 +57,11 @@ export default function ProductListPage(props) {
       dispatch(deleteProduct(product._id));
     }
   };
-  const createHandler = () => {
-    dispatch(createProduct());
-  };
+ 
   return (
     <div>
       <div className="row">
         <h1>Products</h1>
-        {props.match.params.role !== 'admin' && (<button type="button" className="primary" onClick={createHandler}>
-          <i class="fas fa-folder-plus"></i> Create
-        </button>)}
       </div>
 
       {loadingDelete && <LoadingBox></LoadingBox>}
@@ -105,7 +99,7 @@ export default function ProductListPage(props) {
                     type="button"
                     className="min-1"
                     onClick={() =>
-                      props.history.push(`/product/${product._id}/edit`)
+                      props.history.push(`/product/admin/${product._id}/edit`)
                     }
                   >
                     <i class="fas fa-pen"></i> Edit
