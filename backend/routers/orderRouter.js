@@ -91,7 +91,7 @@ orderRouter.post(
         itemsPrice: req.body.itemsPrice,
         deliveryPrice: req.body.deliveryPrice,
         totalPrice: req.body.totalPrice,
-        user: req && req.user && req.user._id,
+        user: req.user._id,
       });
       const createdOrder = await order.save();
       res
