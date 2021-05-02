@@ -38,9 +38,6 @@ export default function OrderListPage(props) {
       dispatch(deleteOrder(order._id));
     }
   };
-  const confirmShipHandle = (order) => {
-    dispatch(confirmShip(order._id));
-  };
   return (
     <div>
       <h1>Orders</h1>

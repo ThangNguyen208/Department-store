@@ -12,7 +12,7 @@ import {
 } from "../constants/productConstants";
 
 export default function ProductListPageAdmin(props) {
-  const sellerMode = props.match.path.indexOf("/seller") >= 0;
+  const adminMode = props.match.path.indexOf("/admin") >= 0;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
   const productCreate = useSelector((state) => state.productCreate);
@@ -41,12 +41,12 @@ export default function ProductListPageAdmin(props) {
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
-    dispatch(listProducts({ seller: sellerMode ? userInfom._id : "" }));
+    dispatch(listProducts({ admin: adminMode ? userInfom._id : "" }));
   }, [
     createdProduct,
     dispatch,
     props.history,
-    sellerMode,
+    adminMode,
     successCreate,
     successDelete,
     userInfom._id,
